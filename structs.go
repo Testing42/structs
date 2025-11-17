@@ -31,7 +31,7 @@ func main() {
 
 	// ... do something awesome with that gathered data!
 
-	outputUserDetails(&appUser)
+	appUser.outputUserDetails()
 }
 
 /*
@@ -40,7 +40,9 @@ func main() {
 The same stored pointer data is used. Doing it this way saves data. This isn't needed
 most of the time but helps with practice
 */
-func outputUserDetails(u *user) {
+
+// this is how you add a stuct to a function to create methods
+func (u user) outputUserDetails() {
 	//..
 
 	/*fmt.Println((*u).firstName, (*u).lastName, (*u).birthDate)
