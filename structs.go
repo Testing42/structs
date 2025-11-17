@@ -32,6 +32,8 @@ func main() {
 	// ... do something awesome with that gathered data!
 
 	appUser.outputUserDetails()
+	appUser.clearUserName()
+	appUser.outputUserDetails()
 }
 
 /*
@@ -42,7 +44,8 @@ most of the time but helps with practice
 */
 
 // this is how you add a stuct to a function to create methods
-func (u user) outputUserDetails() {
+// you don't have to put a derefence when calling the struct but if you don't a copy of the data will be created.
+func (u *user) outputUserDetails() {
 	//..
 
 	/*fmt.Println((*u).firstName, (*u).lastName, (*u).birthDate)
@@ -50,6 +53,13 @@ func (u user) outputUserDetails() {
 	but golang offers the option to not do that with structs so the below works.
 	*/
 	fmt.Println(u.firstName, u.lastName, u.birthDate)
+}
+
+// this shows how to edit struct values
+// when editing a struct make sure to actually get the pointer by addin * infront of the pointer to dereference.
+func (u *user) clearUserName() {
+	u.firstName = ""
+	u.lastName = ""
 }
 
 func getUserData(promptText string) string {
