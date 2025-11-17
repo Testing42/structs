@@ -22,12 +22,7 @@ func main() {
 
 	//you can omit the firstname: same for other values but I would keep it as it could get confusing
 	//you can omit a whole value
-	var appUser = user{
-		firstName: userfirstName,
-		lastName:  userlastName,
-		birthDate: userbirthDate,
-		createdAt: time.Now(),
-	}
+	var appUser = newUser(userfirstName, userlastName, userbirthDate)
 
 	// ... do something awesome with that gathered data!
 
@@ -60,6 +55,15 @@ func (u *user) outputUserDetails() {
 func (u *user) clearUserName() {
 	u.firstName = ""
 	u.lastName = ""
+}
+
+func newUser(firstName, lastName, birthDate string) *user {
+	return &user{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}
 }
 
 func getUserData(promptText string) string {
