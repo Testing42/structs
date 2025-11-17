@@ -20,11 +20,9 @@ func main() {
 	userlastName := getUserData("Please enter your last name: ")
 	userbirthDate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	var appUser user
-
 	//you can omit the firstname: same for other values but I would keep it as it could get confusing
 	//you can omit a whole value
-	appUser = user{
+	var appUser = user{
 		firstName: userfirstName,
 		lastName:  userlastName,
 		birthDate: userbirthDate,
@@ -33,11 +31,22 @@ func main() {
 
 	// ... do something awesome with that gathered data!
 
-	outputUserDetails(appUser)
+	outputUserDetails(&appUser)
 }
 
-func outputUserDetails(u user) {
+/*
+	in order to practice with pointers instead of copying data I will use a pointer so that
+
+The same stored pointer data is used. Doing it this way saves data. This isn't needed
+most of the time but helps with practice
+*/
+func outputUserDetails(u *user) {
 	//..
+
+	/*fmt.Println((*u).firstName, (*u).lastName, (*u).birthDate)
+	technically you need to dereference the pointer as yI have done above
+	but golang offers the option to not do that with structs so the below works.
+	*/
 	fmt.Println(u.firstName, u.lastName, u.birthDate)
 }
 
