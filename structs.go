@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -22,8 +23,13 @@ func main() {
 
 	//you can omit the firstname: same for other values but I would keep it as it could get confusing
 	//you can omit a whole value
-	var appUser = newUser(userfirstName, userlastName, userbirthDate)
 
+	var appUser, err = newUser(userfirstName, userlastName, userbirthDate)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	// ... do something awesome with that gathered data!
 
 	appUser.outputUserDetails()
@@ -57,18 +63,24 @@ func (u *user) clearUserName() {
 	u.lastName = ""
 }
 
-func newUser(firstName, lastName, birthDate string) *user {
+// this is the constructor it makes the struct and can allow easy validation
+func newUser(firstName, lastName, birthDate string) (*user, error) {
+	//setting validation for struct
+	if firstName == "" || lastName == "" || birthDate == "" {
+		return nil, errors.New("firstname, lastname and birthdate are required")
+	}
+
 	return &user{
 		firstName: firstName,
 		lastName:  lastName,
 		birthDate: birthDate,
 		createdAt: time.Now(),
-	}
+	}, nil
 }
 
 func getUserData(promptText string) string {
 	fmt.Print(promptText)
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 	return value
 }
