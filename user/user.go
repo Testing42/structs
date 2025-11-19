@@ -14,6 +14,14 @@ type User struct {
 	createdAt time.Time
 }
 
+//You can make a new struct with all the information of another struct
+
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
 /*
 	in order to practice with pointers instead of copying data I will use a pointer so that
 
@@ -23,6 +31,20 @@ most of the time but helps with practice
 
 // this is how you add a stuct to a function to create methods
 // you don't have to put a derefence when calling the struct but if you don't a copy of the data will be created.
+
+func NewAdmin(email, password string) *Admin {
+	return &Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "ADMIN",
+			lastName:  "ADMIN",
+			birthDate: "---",
+			createdAt: time.Now(),
+		},
+	}
+}
+
 func (u *User) OutputUserDetails() {
 	//..
 
