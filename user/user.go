@@ -6,6 +6,21 @@ import (
 	"time"
 )
 
+/* the type keyword can be used to  assign an alias
+to other built in types
+like type str string this example doesn't make sense
+
+but you can add the custom type to functions
+
+func (text str) log() {
+	fmt.println(text)
+}
+
+var name str = "max"
+
+name.log()
+*/
+
 // To expose variables in a struct the variable must be upper case
 type User struct {
 	firstName string
